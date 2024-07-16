@@ -33,6 +33,7 @@
             inputTitle: 'Choose scale:',
             downloadTitle: 'Download'
         },
+        // set map
         setMap: function (map) {this.map = map;},
         onAdd: function (map) {
             this._map = map;
