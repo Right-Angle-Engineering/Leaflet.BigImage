@@ -33,7 +33,7 @@
             inputTitle: 'Choose scale:',
             downloadTitle: 'Download'
         },
-
+        setMap: function (map) {this.map = map;},
         onAdd: function (map) {
             this._map = map;
 
@@ -408,19 +408,19 @@
                             self.ctx.globalAlpha = 1;
                         }
                     }
-                    for (const [key, value] of Object.entries(self.path)) {
-                        self._drawPath(value);
-                    }
-                    for (const [key, value] of Object.entries(self.markers)) {
-                        if (!(value instanceof HTMLImageElement) && !value.img) {
-                            self._drawText(value, value.x, value.y);
-                        } else {
-                            self.ctx.drawImage(value.img, value.x, value.y);
-                        }
-                    }
-                    for (const [key, value] of Object.entries(self.circles)) {
-                        self._drawCircle(value);
-                    }
+                    // for (const [key, value] of Object.entries(self.path)) {
+                    //     self._drawPath(value);
+                    // }
+                    // for (const [key, value] of Object.entries(self.markers)) {
+                    //     if (!(value instanceof HTMLImageElement) && !value.img) {
+                    //         self._drawText(value, value.x, value.y);
+                    //     } else {
+                    //         self.ctx.drawImage(value.img, value.x, value.y);
+                    //     }
+                    // }
+                    // for (const [key, value] of Object.entries(self.circles)) {
+                    //     self._drawCircle(value);
+                    // }
                     resolve();
                 }));
             }).then(() => {
