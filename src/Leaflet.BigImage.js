@@ -34,7 +34,7 @@
             downloadTitle: 'Download'
         },
         // set map
-        setMap: function (map) {this.map = map;},
+        setMap: function (map) {this._map = map;},
         onAdd: function (map) {
             this._map = map;
 
@@ -395,7 +395,7 @@
             self.canvas.height = dimensions.y;
             self.ctx = self.canvas.getContext('2d');
 
-            this._changeScale(document.getElementById('scale').value);
+            this._changeScale(1);
 
             let promise = new Promise(function (resolve, reject) {
                 self._getLayers(resolve);
@@ -431,8 +431,6 @@
                     link.href = URL.createObjectURL(blob);
                     link.click();
                 });
-                self._containerParams.classList.remove('print-disabled');
-                self._loader.style.display = 'none';
             });
         }
     });
