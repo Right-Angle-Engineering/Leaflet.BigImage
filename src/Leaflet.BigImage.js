@@ -180,8 +180,8 @@
 
         /**
          * Loads the layer for the map
-         * @param {*} layer 
-         * @param {*} resolve 
+         * @param {*} layer
+         * @param {*} resolve
          */
         _getTileLayer: function (layer, resolve) {
             let self = this;
@@ -377,7 +377,7 @@
             }
         },
 
-        _print: async function () {
+        _print: async function (fileFormat = 'blob') {
             let self = this;
 
             self.tilesImgs = {};
@@ -408,48 +408,17 @@
                         self.ctx.drawImage(value.img, value.x, value.y, self.tileSize, self.tileSize);
                         self.ctx.globalAlpha = 1;
                     }
-                }}));
+                }
+                resolve();
+            }));
 
             const finishedFile = await new Promise(resolve => self.canvas.toBlob(resolve));
-            console.warn('blob?? ', finishedFile);
-
-
-            // promise.then(() => {
-            //     return new Promise(((resolve, reject) => {
-            //         for (const [key, layer] of Object.entries(self.tilesImgs)) {
-            //             for (const [key, value] of Object.entries(layer)) {
-            //                 self.ctx.globalAlpha = value.opacity;
-            //                 self.ctx.drawImage(value.img, value.x, value.y, self.tileSize, self.tileSize);
-            //                 self.ctx.globalAlpha = 1;
-            //             }
-            //         }
-            //         // for (const [key, value] of Object.entries(self.path)) {
-            //         //     self._drawPath(value);
-            //         // }
-            //         // for (const [key, value] of Object.entries(self.markers)) {
-            //         //     if (!(value instanceof HTMLImageElement) && !value.img) {
-            //         //         self._drawText(value, value.x, value.y);
-            //         //     } else {
-            //         //         self.ctx.drawImage(value.img, value.x, value.y);
-            //         //     }
-            //         // }
-            //         // for (const [key, value] of Object.entries(self.circles)) {
-            //         //     self._drawCircle(value);
-            //         // }
-            //         resolve();
-            //     }));
-            // }).then(() => {
-            //     // self.canvas.toBlob(function ())
-            //     self.canvas.toBlob(function (blob) {
-            //         finishedFile = blob;
-            //         // let link = document.createElement('a');
-            //         // link.download = "mapExport.png";
-            //         // link.href = URL.createObjectURL(blob);
-            //         // link.click();
-            //     });
-            // });
-
-            return finishedFile;
+            if (fileFormat === 'blob') {
+                return finishedFile;
+            } else if (fileFormat === 'object') {
+                const fileObject = new File([mapImageBlob], 'map.png');
+                return fileObject;
+            }
         }
     });
 
