@@ -416,7 +416,7 @@
             if (fileFormat === 'blob') {
                 return finishedFile;
             } else if (fileFormat === 'object') {
-                const fileObject = new File([mapImageBlob], 'map.png');
+                const fileObject = new File([finishedFile], 'map.png');
                 return fileObject;
             }
         }
